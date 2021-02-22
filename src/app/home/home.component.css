@@ -1,0 +1,17 @@
+.main-link-list {
+    margin: 50px 200px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.main-link {
+    background-color: rgb(180, 177, 177);
+    color: firebrick;
+    width: 300px;
+    height: 300px;
+    margin: 30px 30px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    text-align: center;
+}
