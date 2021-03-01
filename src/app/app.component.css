@@ -1,42 +1,4 @@
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    background-color: chocolate;
-    height: 60px;
-    position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-}
-
-.navbar img{
-    height: 50px;
-    cursor: pointer;
-}
-
-.cart-button{
-    background-color: coral;
-    padding: 5px;
-}
-
-.cart-button img{
-    height: 35px;
-}
-
-.cart-button:hover{
-    background-color: rgb(231, 100, 100);
-}
-
 .content{
     margin-top: 100px;
     min-height: 100vh;
-}
-
-.footer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin-bottom: -100px;
-    background-color: darkkhaki;
 }

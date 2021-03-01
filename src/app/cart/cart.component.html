@@ -1,4 +1,8 @@
-<div class="main-link-list">    
+<div class="main-link-list"> 
+
+    <div class="emty-cart-button" (click)="onEmtyCart ()" 
+    *ngIf="cartItems.length > 0">Tühjenda ostukorv</div>  
+
     <div *ngFor="let item of cartItems; let i = index">
         <div class="main-link">
         <div>{{ item.title }}</div>
@@ -9,3 +13,11 @@
     </div>
     </div>
     </div>
+
+<div class="sum-of-cart"
+*ngIf="cartItems.length > 0">KOKKU: {{ sumOfCart.toFixed(2) }} €</div>
+
+<div *ngIf="cartItems.length == 0">
+    <img src="" alt="">
+    <div>Ostukorv on tühi</div>
+</div>
