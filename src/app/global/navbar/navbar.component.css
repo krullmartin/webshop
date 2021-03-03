@@ -15,14 +15,17 @@
 }
 
 .cart-button{
-    background-color: coral;
-    padding: 5px;
+    background-color: rgb(223, 73, 19);
+    padding: 15px;
+    border-left: 2px solid white;
 }
 
 .cart-button img{
-    height: 35px;
+    height: 30px;
+    padding-right: 10px;
+
 }
 
 .cart-button:hover{
-    background-color: rgb(231, 100, 100);
+    background-color: rgb(241, 79, 4);
 }

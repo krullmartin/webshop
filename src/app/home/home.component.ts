@@ -21,8 +21,7 @@ export class HomeComponent implements OnInit {
 
   onAddToCart(cartItem: Item){
     this.cartService.cartItems.push(cartItem);
-    console.log(cartItem);
-    console.log("Töötab");
+    this.cartService.cartChanged.next(this.cartService.cartItems);
 
   }
 }

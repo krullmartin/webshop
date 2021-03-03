@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddItemComponent } from './admin/add-item/add-item.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { EditItemComponent } from './admin/edit-item/edit-item.component';
+import { ViewItemComponent } from './admin/view-item/view-item.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 
@@ -7,6 +11,10 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [
   {path:"", component:HomeComponent},
   {path:"cart", component:CartComponent},
+  {path:"admin", component:AdminHomeComponent},
+  {path:"admin/add-item", component:AddItemComponent},
+  {path:"admin/edit-item", component:EditItemComponent},
+  {path:"admin/items", component:ViewItemComponent},
   {path:"**", redirectTo:""},
 ];
 
