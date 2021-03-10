@@ -10,9 +10,9 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./edit-item.component.css']
 })
 export class EditItemComponent implements OnInit {
-  item: Item = new Item("",0,"","");
-  itemEditForm = new FormGroup({});
-  itemId: number = 0;
+  item!: Item; //= new Item("",0,"","");
+  itemEditForm!: FormGroup; //new FormGroup({});
+  itemId!: number //= 0;
 
   constructor(private route: ActivatedRoute,
     private itemService: ItemService,

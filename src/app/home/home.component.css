@@ -16,3 +16,11 @@
     border-radius: 0;
     text-align: center;
 }
+
+.filter-bar {
+    display: flex;
+}
+
+.filter-bar div {
+    margin-left: 10px;
+}

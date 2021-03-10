@@ -1,5 +1,11 @@
 <!-- {{items | json }} -->
 
+<div class="filter-bar">
+    <div>{{ 'Järjesta:' | translate }}</div>
+    <div (click)="onSortTitle()">{{ 'Tähestiku järgi' | translate }}</div>
+    <div (click)="onSortPrice()">{{ 'Hinna järgi' | translate }}</div>
+</div>
+
 
 <div class="main-link-list">    
 <div *ngFor="let item of items">
