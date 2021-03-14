@@ -1,13 +1,11 @@
-<div class="main-link-list">    
-    <div *ngFor="let item of items; let i = index">
-        <div class="main-link">
-        <div>{{ item.title }}</div>
-        <div>{{ item.price }}</div>
-        <img src="{{ item.imgSrc }}">
-        <div>{{ item.category }}</div>
-        <div (click)="onDeleteItem(i)">Kustuta ese</div>
-        <div [routerLink]="['/admin/edit-item', i]">Muuda eset</div>
-        <br>
+<button class="main-button back" routerLink="/admin">{{'Tagasi' | translate}}</button>
+
+<div class="item-wrapper">    
+    <div class="item" *ngFor="let item of items; let i = index">
+        <!--<img src="{{ item.imgSrc }}">-->
+        <div class="item-title">{{ item.title }}</div>
+        <div class="item-price">€ {{ item.price }}</div>
+        <button class="main-button change" [routerLink]="['/admin/edit-item', i]">Muuda</button>
+        <button class="main-button delete" (click)="onDeleteItem(i)">Kustuta</button>
     </div>
-    </div>
-    </div>
+</div>

@@ -1,0 +1,29 @@
+form {
+    position: relative;
+    top: -100px;
+    text-align: center;
+}
+
+input {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 20px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.add {
+    margin: auto;
+    width: 150px;
+    height: 40px;
+}
+
+.add:disabled {
+    background-color: lightgray;
+    cursor: initial;
+}
+
+label {
+    font-size: 20px;
+}
