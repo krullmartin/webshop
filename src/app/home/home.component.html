@@ -1,20 +1,18 @@
-<!-- {{items | json }} -->
-
 <div class="filter-bar">
-    <div>{{ 'Järjesta:' | translate }}</div>
-    <div (click)="onSortTitle()">{{ 'Tähestiku järgi' | translate }}</div>
-    <div (click)="onSortPrice()">{{ 'Hinna järgi' | translate }}</div>
+    <div class="filter-name">{{ 'Järjesta:' | translate }}</div>
+    <div class="filter-value title" (click)="onSortTitle()">{{ 'Tähestiku järgi' | translate }}</div>
+    <div class="filter-value price" (click)="onSortPrice()">{{ 'Hinna järgi' | translate }}</div>
 </div>
 
 
-<div class="main-link-list">    
-<div *ngFor="let item of items">
-    <div class="main-link">
-    <div>{{ item.title }}</div>
-    <div>{{ item.price }}</div>
-    <img src="{{ item.imgSrc }}">
-    <div>{{ item.category }}</div>
-    <div (click)="onAddToCart(item)">Lisa ostukorvi</div>
-</div>
-</div>
+<div class="items-wrapper">    
+    <div class="item" *ngFor="let item of items">
+        <img src="{{ item.imgSrc }}">
+        <div class="add-to-cart-button-wrapper">
+            <div class="add-to-cart-button" (click)="onAddToCart(item)">Lisa ostukorvi</div>
+        </div>
+        <div class="item-title" >{{ item.title }}</div>
+        <div class="item-price" >€ {{ item.price.toFixed(2) }}</div>
+        <!--<div>{{ item.category }}</div>-->
+    </div>
 </div>

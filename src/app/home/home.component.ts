@@ -17,13 +17,26 @@ export class HomeComponent implements OnInit {
     private itemService: ItemService) { }
 
   ngOnInit(): void {
-    this.items = this.itemService.itemsInService.slice();
+    //this.items = this.itemService.itemsInService.slice();
+    this.itemService.getItemsFromDatabase().subscribe(items =>{
+      this.items = [];
+      this.itemService.itemsInService = [];
+      for (const key in items) {
+          const element = items[key];
+          this.items.push(element);
+          this.itemService.itemsInService.push(element);
+      }
+      //this.items = items;
+      //this.itemService.itemsInService = items;
+    })
   }
   
   onSortTitle() {
+    //this.itemService.saveItemsToDatabase(); et andmed saata firebasi
     if (this.titleSortNumber == 0) {
       this.items.sort((a, b) => {
         return a.title.localeCompare(b.title);
+        //ASCII
       });
       this.titleSortNumber = 1;
     } else if (this.titleSortNumber == 1 ) {
@@ -49,8 +62,6 @@ export class HomeComponent implements OnInit {
       this.priceSortNumber = 0;
     }
   }
-
-
 
   onAddToCart(cartItem: Item){
     this.cartService.cartItems.push(cartItem);
