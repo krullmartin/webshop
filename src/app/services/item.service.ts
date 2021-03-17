@@ -14,15 +14,18 @@ export class ItemService {
 
   url ="https://webshop-a01a8-default-rtdb.europe-west1.firebasedatabase.app/items.json";
 
+  //asendab andmebaasis kõik ära selle väärtusega mis kaasa anname
   saveItemsToDatabase() {
     this.http.put(this.url, this.itemsInService).subscribe();
   }
 
+  //võtab kõik andmebaasist - by default tüüp on tal Object.  <tüüp> anname oma tüübi
   getItemsFromDatabase () {
     return this.http.get<Item[]>(this.url);
   }
-
-addItemToDatabase(item: Item) {
+  
+  //lisab andmebaasi selle väärtuse mis kaasa anname - paneb ülejäänule otsa
+  addItemToDatabase(item: Item) {
   this.http.post(this.url, item).subscribe();
 }
 

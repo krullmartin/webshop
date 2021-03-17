@@ -12,17 +12,18 @@ export class HomeComponent implements OnInit {
   items: Item [] = [];
   titleSortNumber = 0;
   priceSortNumber = 0;
+  kuupaev = new Date();
 
   constructor(private cartService: CartService,
     private itemService: ItemService) { }
 
   ngOnInit(): void {
     //this.items = this.itemService.itemsInService.slice();
-    this.itemService.getItemsFromDatabase().subscribe(items =>{
+    this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase =>{
       this.items = [];
       this.itemService.itemsInService = [];
-      for (const key in items) {
-          const element = items[key];
+      for (const key in itemsFromDatabase) {
+          const element = itemsFromDatabase[key];
           this.items.push(element);
           this.itemService.itemsInService.push(element);
       }
@@ -63,10 +64,17 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  onRemoveFromCart(item: Item) {
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.title);
+    if (i != -1) {
+      this.cartService.cartItems.splice(i,1);
+      this.cartService.cartChanged.next(this.cartService.cartItems);
+    }
+  }
+
   onAddToCart(cartItem: Item){
     this.cartService.cartItems.push(cartItem);
     this.cartService.cartChanged.next(this.cartService.cartItems);
-
   }
 
 }

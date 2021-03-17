@@ -1,5 +1,9 @@
+<!--{{ kuupaev | date:'mediumDate' }}-->
+<!--{{ 1500000 | currency:'EUR' }}-->
+
+
 <div class="filter-bar">
-    <div class="filter-name">{{ 'Järjesta:' | translate }}</div>
+    <div class="filter-name">{{ 'Järjesta:' | translate | uppercase }}</div>
     <div class="filter-value title" (click)="onSortTitle()">{{ 'Tähestiku järgi' | translate }}</div>
     <div class="filter-value price" (click)="onSortPrice()">{{ 'Hinna järgi' | translate }}</div>
 </div>
@@ -9,10 +13,14 @@
     <div class="item" *ngFor="let item of items">
         <img src="{{ item.imgSrc }}">
         <div class="add-to-cart-button-wrapper">
-            <div class="add-to-cart-button" (click)="onAddToCart(item)">Lisa ostukorvi</div>
+            <div class="add-to-cart-button">
+                <span (click)="onRemoveFromCart(item)">-</span>
+                <span>____tk____</span>
+                <span (click)="onAddToCart(item)">+</span>
+            </div>
         </div>
-        <div class="item-title" >{{ item.title }}</div>
-        <div class="item-price" >€ {{ item.price.toFixed(2) }}</div>
+        <div class="item-title" >{{ item.title | translate | shortenTitle: 6}}</div>
+        <div class="item-price" >€ {{ item.price | thousandSeparator}}</div>
         <!--<div>{{ item.category }}</div>-->
     </div>
 </div>

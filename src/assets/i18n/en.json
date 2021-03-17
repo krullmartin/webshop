@@ -1,6 +1,8 @@
 {
     "Järjesta:": "Sort:",
     "Tähestiku järgi": "Alphabetically",
-    "Hinna järgi": "Price"
+    "Hinna järgi": "Price",
+
+    "Kas kustutada?": "Are you sure you want to delete?"
     
 }

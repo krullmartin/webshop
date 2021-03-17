@@ -16,6 +16,8 @@ import { AddItemComponent } from './admin/add-item/add-item.component';
 import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { ViewItemComponent } from './admin/view-item/view-item.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
+import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
+import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,7 +34,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddItemComponent,
     EditItemComponent,
     ViewItemComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    ThousandSeparatorPipe,
+    ShortenTitlePipe
   ],
   imports: [
     BrowserModule,
