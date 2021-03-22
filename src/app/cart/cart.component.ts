@@ -8,11 +8,8 @@ import { CartService } from './cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: {imgSrc: string;
-    title: string;
-    price: number;
-    category: string;}[] = []; 
-    sumOfCart: number = 0;
+  cartItems: {cartItem: Item, count: number}[] = []; 
+  sumOfCart: number = 0;
 
   constructor(private cartService: CartService) { }
 
@@ -39,7 +36,7 @@ export class CartComponent implements OnInit {
     this.sumOfCart = 0;
     this.cartItems.forEach(item => {
       //this.sumOfCart = this.sumOfCart + item.price;
-      this.sumOfCart += item.price;
+      this.sumOfCart += item.cartItem.price * item.count;
     });
   }
 

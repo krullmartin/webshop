@@ -1,6 +1,9 @@
 <!--{{ kuupaev | date:'mediumDate' }}-->
 <!--{{ 1500000 | currency:'EUR' }}-->
 
+<div *ngFor="let item of items | uniqueCategory">
+    {{ item }}
+</div>
 
 <div class="filter-bar">
     <div class="filter-name">{{ 'Järjesta:' | translate | uppercase }}</div>
@@ -10,8 +13,8 @@
 
 
 <div class="items-wrapper">    
-    <div class="item" *ngFor="let item of items">
-        <img src="{{ item.imgSrc }}">
+    <div class="item" *ngFor="let item of items; let i = index">
+        <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
         <div class="add-to-cart-button-wrapper">
             <div class="add-to-cart-button">
                 <span (click)="onRemoveFromCart(item)">-</span>

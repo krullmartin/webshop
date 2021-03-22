@@ -18,6 +18,8 @@ import { ViewItemComponent } from './admin/view-item/view-item.component';
 import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
+import { ViewComponent } from './item/view/view.component';
+import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -36,7 +38,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ViewItemComponent,
     AdminHomeComponent,
     ThousandSeparatorPipe,
-    ShortenTitlePipe
+    ShortenTitlePipe,
+    ViewComponent,
+    UniqueCategoryPipe
   ],
   imports: [
     BrowserModule,

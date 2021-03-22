@@ -6,10 +6,12 @@ import { EditItemComponent } from './admin/edit-item/edit-item.component';
 import { ViewItemComponent } from './admin/view-item/view-item.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
+import { ViewComponent } from './item/view/view.component';
 
 // kommentaar ctrl ä
 const routes: Routes = [
   {path:"", component:HomeComponent},
+  {path:"view/:itemId", component:ViewComponent},
   {path:"cart", component:CartComponent},
   {path:"admin", component:AdminHomeComponent},
   {path:"admin/add-item", component:AddItemComponent},

@@ -4,7 +4,7 @@
     <div class="item" *ngFor="let item of items; let i = index">
         <!--<img src="{{ item.imgSrc }}">-->
         <div class="item-title">{{ item.title }}</div>
-        <div class="item-price">€ {{ item.price }}</div>
+        <div class="item-price">€ {{ item.price | thousandSeparator }}</div>
         <button class="main-button change" [routerLink]="['/admin/edit-item', i]">Muuda</button>
         <button class="main-button delete" (click)="onDeleteItem(i)">Kustuta</button>
     </div>
