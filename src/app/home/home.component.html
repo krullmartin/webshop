@@ -1,8 +1,9 @@
 <!--{{ kuupaev | date:'mediumDate' }}-->
 <!--{{ 1500000 | currency:'EUR' }}-->
 
-<div *ngFor="let item of items | uniqueCategory">
-    {{ item }}
+<div *ngFor="let category of itemsOriginal | uniqueCategory; let i = index">
+    <input (click)="onSelectCategory(i)" hidden type="checkbox" id="{{category}}">
+    <label for="{{category}}" [ngClass]="{'category-active': itemCategories[i].isSelected}">{{category}}</label>
 </div>
 
 <div class="filter-bar">
@@ -13,7 +14,7 @@
 
 
 <div class="items-wrapper">    
-    <div class="item" *ngFor="let item of items; let i = index">
+    <div class="item" *ngFor="let item of itemsShown; let i = index">
         <img routerLink="view/{{i}}" src="{{ item.imgSrc }}">
         <div class="add-to-cart-button-wrapper">
             <div class="add-to-cart-button">
@@ -27,3 +28,7 @@
         <!--<div>{{ item.category }}</div>-->
     </div>
 </div>
+
+<div *ngIf="itemsShown.length == 0 && !isLoading">Ühtegi kategooriat pole valitud, vali sobiv kategooria!</div>
+
+<app-spinner *ngIf="isLoading"></app-spinner>

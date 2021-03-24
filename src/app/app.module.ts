@@ -20,6 +20,7 @@ import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
 import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
 import { ViewComponent } from './item/view/view.component';
 import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -40,7 +41,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ThousandSeparatorPipe,
     ShortenTitlePipe,
     ViewComponent,
-    UniqueCategoryPipe
+    UniqueCategoryPipe,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }
     })
   ],
-  providers: [],
+  providers: [UniqueCategoryPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
