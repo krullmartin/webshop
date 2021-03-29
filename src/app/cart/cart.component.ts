@@ -31,6 +31,28 @@ export class CartComponent implements OnInit {
     this.calculateSumOfCart();
   }
 
+  onRemoveFromCart(item: Item) {
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+    if (i != -1) {
+      if (this.cartService.cartItems[i].count == 1) {
+        this.cartService.cartItems.splice(i,1);
+      } else {
+        this.cartService.cartItems[i].count -= 1;
+      }
+      this.cartService.cartChanged.next(this.cartService.cartItems);
+    }
+  }
+
+  onAddToCart(item: Item) {
+    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+    if (i != -1) {
+      this.cartService.cartItems[i].count += 1;
+    } else {
+      this.cartService.cartItems.push({cartItem: item, count:1});
+    }
+      this.cartService.cartChanged.next(this.cartService.cartItems);
+  }
+
   // koodi korduv osa lihtsamal kujul
   calculateSumOfCart() {
     this.sumOfCart = 0;
@@ -40,4 +62,5 @@ export class CartComponent implements OnInit {
     });
   }
 
+  
 }
