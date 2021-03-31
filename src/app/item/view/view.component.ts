@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { CheckAuthService } from 'src/app/auth/check-auth.service';
 import { CartService } from 'src/app/cart/cart.service';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
@@ -19,9 +21,12 @@ export class ViewComponent implements OnInit {
 
   constructor(private route : ActivatedRoute,
     private itemService: ItemService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private checkAuth: CheckAuthService,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    this.checkAuth.autologin();
     let id = Number(this.route.snapshot.paramMap.get('itemId'));
     this.item = this.itemService.itemsInService[id];
     //console.log(this.route.snapshot.paramMap);
@@ -38,6 +43,7 @@ export class ViewComponent implements OnInit {
         this.cartService.cartItems[i].count -= 1;
       }
       this.cartService.cartChanged.next(this.cartService.cartItems);
+      this.cookieService.set( 'cart', JSON.stringify(this.cartService.cartItems) );
     }
   }
 
@@ -49,6 +55,7 @@ export class ViewComponent implements OnInit {
       this.cartService.cartItems.push({cartItem: item, count:1});
     }
       this.cartService.cartChanged.next(this.cartService.cartItems);
+      this.cookieService.set( 'cart', JSON.stringify(this.cartService.cartItems) );
   }
 
   

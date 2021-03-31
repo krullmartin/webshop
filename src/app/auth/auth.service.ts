@@ -97,6 +97,8 @@ export class AuthService {
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
       this.autoLogout(expirationDuration);
+    } else {
+      this.logout();
     }
   }
 

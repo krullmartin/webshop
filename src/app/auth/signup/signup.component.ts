@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService, AuthResponseData } from '../auth.service';
+import { CheckAuthService } from '../check-auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -13,9 +14,11 @@ export class SignupComponent implements OnInit {
   isLoading = false;
   error: string = "";
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private checkAuth: CheckAuthService) { }
 
   ngOnInit(): void {
+    this.checkAuth.autologin();
 
   }
 

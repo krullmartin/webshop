@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { CheckAuthService } from 'src/app/auth/check-auth.service';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
 
@@ -12,9 +13,11 @@ export class ViewItemComponent implements OnInit {
   items: Item [] = [];
 
   constructor(private itemService: ItemService,
-    private translate: TranslateService) { }
+    private translate: TranslateService,
+    private checkAuth: CheckAuthService) { }
 
   ngOnInit(): void {
+    this.checkAuth.autologin();
     //this.items = this.itemService.itemsInService;
     this.itemService.getItemsFromDatabase().subscribe(items => {
       console.log("olen võtmas uusi esemeid")

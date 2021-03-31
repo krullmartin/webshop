@@ -9,14 +9,14 @@
         <span (click)="onRemoveFromCart(item.cartItem)">-</span>
         <div>{{ item.count }} tk </div>
         <span (click)="onAddToCart(item.cartItem)">+</span>
-        <div>€ {{ item.count * item.cartItem.price }}</div>
+        <div>€ {{ item.count * item.cartItem.price | thousandSeparator }}</div>
         <!--<div>{{ item.cartItem.category }}</div>-->
         <img class="delete-from-cart-button" (click)="onDeleteFromCart(i)" src="assets/x-mark.svg" alt="">
     </div>
 </div>
 
 <div class="sum-of-cart"
-*ngIf="cartItems.length > 0">KOKKU:€ {{ sumOfCart | thousandSeparator}}</div>
+*ngIf="cartItems.length > 0">KOKKU:€ {{ sumOfCart | thousandSeparator }}</div>
 
 <div class="emty-cart" *ngIf="cartItems.length == 0">
     <img src="assets\emty-cart.png" alt="Cart">
