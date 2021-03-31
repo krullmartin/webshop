@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit {
       //this.sumOfCart = this.sumOfCart + item.price;
       this.sumOfCart += item.cartItem.price * item.count;
     });
+    
     this.checkAuth.autologin();
     this.checkAuth.loggedIn.subscribe(logged => {
       this.isLoggedIn = logged;
