@@ -6,6 +6,8 @@ export class Item {
         public category: string,
         public barcode: number,
         public producer: string,
-        public description: string
+        public description: string,
+        public isActive: boolean,
+        public size: string[],
     ) {}
 }

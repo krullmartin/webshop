@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { CheckAuthService } from 'src/app/auth/check-auth.service';
 import { CartService } from 'src/app/cart/cart.service';
 import { Item } from 'src/app/models/item.model';
 
@@ -11,11 +12,24 @@ import { Item } from 'src/app/models/item.model';
 export class ItemCardComponent implements OnInit {
   @Input() item!: Item;
   @Input() i!: number;
+  @Output() itemActiveChanged = new EventEmitter();
+  isLoggedIn = false;
 
   constructor( private cookieService: CookieService,
-    private cartService: CartService) { }
+    private cartService: CartService,
+    private checkAuth: CheckAuthService) { }
 
   ngOnInit(): void {
+    this.checkAuth.autologin();
+    this.checkAuth.loggedIn.subscribe(logged => {
+      this.isLoggedIn = logged;
+    });
+    this.isLoggedIn = this.checkAuth.isLoggedIn();
+  }
+
+  onItemActive() {
+    this.item.isActive = ! this.item.isActive;
+    this.itemActiveChanged.emit(this.item);
   }
 
   onRemoveFromCart(item: Item) {

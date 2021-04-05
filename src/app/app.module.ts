@@ -13,18 +13,13 @@ import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './global/navbar/navbar.component';
 import { FooterComponent } from './global/footer/footer.component';
-import { AddItemComponent } from './admin/add-item/add-item.component';
-import { EditItemComponent } from './admin/edit-item/edit-item.component';
-import { ViewItemComponent } from './admin/view-item/view-item.component';
-import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
-import { ThousandSeparatorPipe } from './pipes/thousand-separator.pipe';
-import { ShortenTitlePipe } from './pipes/shorten-title.pipe';
-import { ViewComponent } from './item/view/view.component';
 import { UniqueCategoryPipe } from './pipes/unique-category.pipe';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { ItemCardComponent } from './item/item-card/item-card.component';
+import { ShowActiveItemsPipe } from './home/show-active-items.pipe';
+import { AdminModule } from './admin/admin.module';
+import { ItemModule } from './item/item.module';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -38,24 +33,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    AddItemComponent,
-    EditItemComponent,
-    ViewItemComponent,
-    AdminHomeComponent,
-    ThousandSeparatorPipe,
-    ShortenTitlePipe,
-    ViewComponent,
     UniqueCategoryPipe,
     SpinnerComponent,
     LoginComponent,
     SignupComponent,
-    ItemCardComponent
+    ShowActiveItemsPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       //defaultLanguage: 'en', 
@@ -64,7 +51,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
     }
-    })
+    }),
+    AdminModule,
+    ItemModule,
   ],
   providers: [UniqueCategoryPipe, CookieService],
   bootstrap: [AppComponent]
