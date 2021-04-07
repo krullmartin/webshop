@@ -8,6 +8,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ItemModule } from '../item/item.module';
+import { SizeItemComponent } from './size-item/size-item.component';
 
 
 
@@ -17,6 +18,7 @@ import { ItemModule } from '../item/item.module';
     EditItemComponent,
     ViewItemComponent,
     AdminHomeComponent,
+    SizeItemComponent,
   ],
   imports: [
     CommonModule,

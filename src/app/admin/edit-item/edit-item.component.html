@@ -17,10 +17,10 @@
     <input type="text" formControlName="producer" placeholder="Toote päritolumaa"><br>
 
     <label>Suurus</label><br>
-    <span>
-        <label>34</label>
-        <input type="checkbox" formControlName="size" placeholder="Toote suurus"><br>
-    </span>
+    <span *ngFor="let size of sizes; let i = index">
+        <label>{{size}}</label>
+        <input type="checkbox" [checked]="itemSizes[i]==size" (change)="onSizeChanged(size, $event)">
+    </span><br>
 
     <label>Toode aktiivne</label>
     <input type="checkbox" formControlName="isActive"><br>

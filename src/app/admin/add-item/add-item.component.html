@@ -10,17 +10,17 @@
     <label>Kategooria</label>
     <input type="text" ngModel name="category" placeholder="Toote kategooria" required><br>
     <label>Ribakood</label>
-    <input type="number" ngModel name="barcode" placeholder="Toote ribakood" required><br>
+    <input type="number" ngModel name="barcode" placeholder="Toote ribakood"><br>
     <label>Kirjeldus</label>
-    <input type="text" ngModel name="description" placeholder="Toote kirjeldus" required><br>
+    <input type="text" ngModel name="description" placeholder="Toote kirjeldus"><br>
     <label>Päritolumaa</label>
-    <input type="text" ngModel name="producer" placeholder="Toote päritolumaa" required><br>
+    <input type="text" ngModel name="producer" placeholder="Toote päritolumaa"><br>
 
     <label>Suurus</label><br>
     <span *ngFor="let size of sizes">
         <label>{{size}}</label>
-        <input type="checkbox" ngModel name="size" required>
-    </span>
+        <input type="checkbox" (change)="onSizeChanged(size, $event)">
+    </span><br>
     
 
     <button class="main-button add" [disabled]="addItemForm.invalid" type="submit">Lisa ese</button>
