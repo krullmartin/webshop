@@ -9,6 +9,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ItemModule } from '../item/item.module';
 import { SizeItemComponent } from './size-item/size-item.component';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { ViewCategoryComponent } from './category/view-category/view-category.component';
 
 
 
@@ -19,6 +21,8 @@ import { SizeItemComponent } from './size-item/size-item.component';
     ViewItemComponent,
     AdminHomeComponent,
     SizeItemComponent,
+    AddCategoryComponent,
+    ViewCategoryComponent,
   ],
   imports: [
     CommonModule,

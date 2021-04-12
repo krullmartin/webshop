@@ -1,3 +1,29 @@
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    padding-top: 150px;
+}
+
+.sidenav label {
+    padding: 6px 8px 6px 16px;
+    font-size: 25px;
+    display: block;
+}
+
+.sidenav label:hover {
+    cursor: pointer;
+    color: black;
+    font-weight: 600;
+}
+
+.main {
+    margin-left: 160px;
+    font-size: 18px;
+    padding: 0 10px;
+}
+
 .filter-bar {
     display: flex;
     align-items: center;

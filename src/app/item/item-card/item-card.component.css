@@ -41,9 +41,11 @@
     visibility: hidden;
     box-shadow: 0 0 10px 0 lightgrey;
     border-radius: 30px;
-    padding: 10px;
+    padding: 0px;
     cursor: pointer;
 }
 
-
+.add-to-cart-button img {
+    width: 20px;
+}
 

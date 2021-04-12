@@ -1,24 +1,25 @@
-<div class="emty-cart-button" (click)="onEmtyCart ()" 
+<div class="empty-cart-button" (click)="onEmtyCart ()" 
 *ngIf="cartItems.length > 0">Tühjenda ostukorv</div>  
 
 <div class="items-wrapper">
     <div class="item" *ngFor="let item of cartItems; let i = index">
-        <img src="{{ item.cartItem.imgSrc }}">
-        <div class="item-title" >{{ item.cartItem.title }}</div>
+        <img class="item-img" src="{{ item.cartItem.imgSrc }}">
+        <div class="item-title" >{{ item.cartItem.title }} (Suurus: {{ item.cartSize }})</div>
         <div class="item-price" >€ {{ item.cartItem.price | thousandSeparator}}</div>
-        <span (click)="onRemoveFromCart(item.cartItem)">-</span>
-        <div>{{ item.count }} tk </div>
-        <span (click)="onAddToCart(item.cartItem)">+</span>
-        <div>€ {{ item.count * item.cartItem.price | thousandSeparator }}</div>
-        <!--<div>{{ item.cartItem.category }}</div>-->
-        <img class="delete-from-cart-button" (click)="onDeleteFromCart(i)" src="assets/x-mark.svg" alt="">
+        <span class="add-to-cart-button">
+            <span (click)="onRemoveFromCart(item)"><img src="assets/minus.svg"></span>
+            <div>{{ item.count }} tk </div>
+            <span (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
+        </span>
+        <div class="item-price">€ {{ item.count * item.cartItem.price | thousandSeparator }}</div>
+        <img class="delete-from-cart-button" (click)="onDeleteFromCart(i)" src="assets/x-mark.svg">
     </div>
 </div>
 
 <div class="sum-of-cart"
-*ngIf="cartItems.length > 0">KOKKU:€ {{ sumOfCart | thousandSeparator }}</div>
+*ngIf="cartItems.length > 0">KOKKU: € {{ sumOfCart | thousandSeparator }}</div>
 
-<div class="emty-cart" *ngIf="cartItems.length == 0">
+<div class="empty-cart" *ngIf="cartItems.length == 0">
     <img src="assets\emty-cart.png" alt="Cart">
     <div>Teie ostukorv on tühi</div>
 </div>

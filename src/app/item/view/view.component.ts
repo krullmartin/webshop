@@ -13,6 +13,7 @@ import { ItemService } from 'src/app/services/item.service';
 })
 export class ViewComponent implements OnInit {
   item!: Item;
+  cartSize: string = "";
 
   //1.saame numbri urli seest kätte (ActivatedRoute const)
   //2.selle abil saame õige eseme servicest kätte (ItemService const)
@@ -26,16 +27,23 @@ export class ViewComponent implements OnInit {
     private cookieService: CookieService) { }
 
   ngOnInit(): void {
+    this.itemService.getItemsFromDatabase().subscribe(items => {
+      this.itemService.itemsInService = [];
+      for (const key in items) {
+          const element = items[key];
+          this.itemService.itemsInService.push(element);
+      }
     this.checkAuth.autologin();
     let id = Number(this.route.snapshot.paramMap.get('itemId'));
     this.item = this.itemService.itemsInService[id];
-    //console.log(this.route.snapshot.paramMap);
-    //console.log(id);
-    //console.log(this.item);
+    });
+
+    
   }
 
   onRemoveFromCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+    let i = this.cartService.cartItems.findIndex(cartItem => 
+      item.title == cartItem.cartItem.title && this.cartSize == cartItem.cartSize);
     if (i != -1) {
       if (this.cartService.cartItems[i].count == 1) {
         this.cartService.cartItems.splice(i,1);
@@ -48,11 +56,15 @@ export class ViewComponent implements OnInit {
   }
 
   onAddToCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+    if (this.cartSize == "") {
+      return;
+    }
+    let i = this.cartService.cartItems.findIndex(cartItem => 
+      item.title == cartItem.cartItem.title && this.cartSize == cartItem.cartSize);
     if (i != -1) {
       this.cartService.cartItems[i].count += 1;
     } else {
-      this.cartService.cartItems.push({cartItem: item, count:1});
+      this.cartService.cartItems.push({cartItem: item, cartSize: this.cartSize, count:1});
     }
       this.cartService.cartChanged.next(this.cartService.cartItems);
       this.cookieService.set( 'cart', JSON.stringify(this.cartService.cartItems) );

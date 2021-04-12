@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CheckAuthService } from 'src/app/auth/check-auth.service';
 import { Item } from 'src/app/models/item.model';
 import { ItemService } from 'src/app/services/item.service';
+import { CategoryService } from '../category/category.service';
 import { SizeService } from '../size-item/size.service';
 
 @Component({
@@ -18,33 +19,64 @@ export class EditItemComponent implements OnInit {
   sizes: string [] = [];
   itemSizes: string [] = [];
   isItemSizesChecked: {size: string, checked: boolean}[] = [];
+  categories: {categoryName: string} [] = [];
 
   constructor(private route: ActivatedRoute,
     private itemService: ItemService,
     private router: Router,
     private checkAuth: CheckAuthService,
-    private sizeService: SizeService) { }
+    private sizeService: SizeService,
+    private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.sizes = this.sizeService.sizes;
-    this.checkAuth.autologin();
-    this.itemId = (Number)(this.route.snapshot.paramMap.get("itemId"));
-    this.item = this.itemService.itemsInService[this.itemId];
-    this.itemSizes = this.item.size;
-    this.isItemSizesChecked = this.sizes.map(size => { return{size:size, checked:false}});
+
+    this.itemService.getItemsFromDatabase().subscribe(items => {
+      this.itemService.itemsInService = [];
+      for (const key in items) {
+          const element = items[key];
+          this.itemService.itemsInService.push(element);
+      }
+
+      this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
+        for (const key in categoriesFromFb) {
+          const element = categoriesFromFb[key];
+          this.categories.push({categoryName: element.categoryName});
+        }
+        
+      });
+      this.sizes = this.sizeService.sizes;
+      this.checkAuth.autologin();
+      this.itemId = (Number)(this.route.snapshot.paramMap.get("itemId"));
+      this.item = this.itemService.itemsInService[this.itemId];
+      
+      if (this.item.size) {
+        this.itemSizes = this.item.size;
+        this.isItemSizesChecked = this.sizes.map(size => ({ size:size, checked: this.itemSizes.includes(size)}));
+      } else {
+        this.isItemSizesChecked = this.sizes.map(size => ({ size:size, checked: false}));
+      }
+      
+      console.log(this.isItemSizesChecked);
+      
+      this.itemEditForm = new FormGroup({
+        title: new FormControl(this.item.title),
+        price: new FormControl(this.item.price),
+        imgSrc: new FormControl(this.item.imgSrc),
+        category: new FormControl(this.item.category),
+        barcode: new FormControl(this.item.barcode),
+        producer: new FormControl(this.item.producer),
+        description: new FormControl(this.item.description),
+        isActive: new FormControl(this.item.isActive),
+        size: new FormControl(this.item.size),
+      });
+      console.log(this.item);
+
+
+
+
+    })
+
     
-    this.itemEditForm = new FormGroup({
-      title: new FormControl(this.item.title),
-      price: new FormControl(this.item.price),
-      imgSrc: new FormControl(this.item.imgSrc),
-      category: new FormControl(this.item.category),
-      barcode: new FormControl(this.item.barcode),
-      producer: new FormControl(this.item.producer),
-      description: new FormControl(this.item.description),
-      isActive: new FormControl(this.item.isActive),
-      size: new FormControl(this.item.size),
-    });
-    console.log(this.item);
   }
 
   onSizeChanged(size: string, event: Event) {

@@ -10,7 +10,7 @@ import { CartService } from './cart.service';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  cartItems: {cartItem: Item, count: number}[] = []; 
+  cartItems: {cartItem: Item, cartSize: string, count: number}[] = []; 
   sumOfCart: number = 0;
 
   constructor(private cartService: CartService,
@@ -34,8 +34,9 @@ export class CartComponent implements OnInit {
     this.calculateSumOfCart();
   }
 
-  onRemoveFromCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+  onRemoveFromCart(item: any) {
+    let i = this.cartService.cartItems.findIndex(cartItem => 
+      item.cartItem.title == cartItem.cartItem.title && cartItem.cartSize == item.cartSize);
     if (i != -1) {
       if (this.cartService.cartItems[i].count == 1) {
         this.cartService.cartItems.splice(i,1);
@@ -46,13 +47,12 @@ export class CartComponent implements OnInit {
     }
   }
 
-  onAddToCart(item: Item) {
-    let i = this.cartService.cartItems.findIndex(cartItem => item.title == cartItem.cartItem.title);
+  onAddToCart(item: any) {
+    let i = this.cartService.cartItems.findIndex(cartItem => 
+      item.cartItem.title == cartItem.cartItem.title && cartItem.cartSize == item.cartSize);
     if (i != -1) {
       this.cartService.cartItems[i].count += 1;
-    } else {
-      this.cartService.cartItems.push({cartItem: item, count:1});
-    }
+    } 
       this.calculateSumOfCart();
   }
 

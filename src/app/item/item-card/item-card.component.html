@@ -1,16 +1,20 @@
 <span *ngIf="isLoggedIn" (click)="onItemActive()" class="active" [ngClass]="{'not-active': !item.isActive}">
 <span *ngIf="!item.isActive; else notActive">Aktiivseks</span>
-<ng-template #notActive>Mitteaktiivne</ng-template>
+<ng-template #notActive>Mitteaktiivseks</ng-template>
 </span>
 
 <img class="item-img" routerLink="view/{{i}}" src="{{ item.imgSrc }}">
-<div class="add-to-cart-button-wrapper">
+
+<!-- <div class="add-to-cart-button-wrapper">
+
     <div class="add-to-cart-button">
-        <span (click)="onRemoveFromCart(item)">-</span>
-        <span>____tk____</span>
-        <span (click)="onAddToCart(item)">+</span>
+        <span (click)="onRemoveFromCart(item)"><img src="assets/minus.svg"></span>
+        <span>__tk__</span>
+        <span (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
     </div>
-</div>
-<div class="item-title" >{{ item.title | translate | shortenTitle: 6}}</div>
+    
+</div> -->
+
+<div class="item-title" >{{ item.title | translate | shortenTitle }}</div>
 <div class="item-price" >€ {{ item.price | thousandSeparator}}</div>
     
