@@ -49,6 +49,7 @@ export class AddItemComponent implements OnInit {
     if (form.valid) {
       let formValue = form.value;
       let item = new Item(
+        formValue.id,
         formValue.title,
         formValue.price,
         formValue.imgSrc,

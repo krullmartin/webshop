@@ -1,11 +1,11 @@
 <button class="main-button back" routerLink="/admin">{{'Tagasi' | translate}}</button>
 
 <div class="item-wrapper">    
-    <div class="item" *ngFor="let item of items; let i = index">
+    <div class="item" *ngFor="let item of items">
         <!--<img src="{{ item.imgSrc }}">-->
         <div class="item-title">{{ item.title }}</div>
         <div class="item-price">€ {{ item.price | thousandSeparator }}</div>
-        <button class="main-button change" [routerLink]="['/admin/edit-item', i]">Muuda</button>
-        <button class="main-button delete" (click)="onDeleteItem(i)">Kustuta</button>
+        <button class="main-button change" [routerLink]="['/admin/edit-item', item.id]">Muuda</button>
+        <button class="main-button delete" (click)="onDeleteItem(item.id)">Kustuta</button>
     </div>
 </div>

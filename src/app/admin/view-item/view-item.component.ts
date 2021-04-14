@@ -32,12 +32,16 @@ export class ViewItemComponent implements OnInit {
     console.log("töötlen");
   }
 
-  onDeleteItem(i: number) {
+  onDeleteItem(id: number) {
     let isConfirm = confirm(this.translate.instant("Kas kustutada?"));
-    if (isConfirm){
+    if (isConfirm) {
+      let i = this.itemService.itemsInService.findIndex(item => item.id == id);
+      if (i) {
       this.itemService.itemsInService.splice(i,1);
       this.items.splice(i, 1);
       this.itemService.saveItemsToDatabase().subscribe();
+      }
+      
     }
     
   }

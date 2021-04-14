@@ -19,6 +19,14 @@ export class ItemService {
     return this.http.put(this.url, this.itemsInService);
   }
 
+  // saveItemsToDatabase() {
+  //   return this.http.put(this.url, this.itemsInService.map(item => ({...item, id: this.getRandomNumber()})));
+  // }
+
+  // getRandomNumber() {
+  //   return Math.floor(Math.random() * (99999999 - 10000000) + 10000000);
+  // }
+
   //võtab kõik andmebaasist - by default tüüp on tal Object.  <tüüp> anname oma tüübi
   getItemsFromDatabase () {
     return this.http.get<Item[]>(this.url);

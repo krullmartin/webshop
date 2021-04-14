@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { CheckAuthService } from '../auth/check-auth.service';
 import { Item } from '../models/item.model';
 import { UniqueCategoryPipe } from '../pipes/unique-category.pipe';
 import { ItemService } from '../services/item.service';
+import { ShowActiveItemsPipe } from './show-active-items.pipe';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +23,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private itemService: ItemService,
     private uniqueCategoryPipe: UniqueCategoryPipe,
-    private checkAuth: CheckAuthService) { }
+    private checkAuth: CheckAuthService,
+    private showActiveItemsPipe: ShowActiveItemsPipe,
+    private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.checkAuth.autologin();
@@ -29,8 +33,8 @@ export class HomeComponent implements OnInit {
       this.isLoggedIn = logged;
     });
     this.isLoggedIn = this.checkAuth.isLoggedIn();
-    //this.itemsOriginalOriginal = this.itemService.itemsInService.slice();
     this.isLoading = true;
+    this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase =>{
       this.itemsOriginal = [];
       this.itemService.itemsInService = [];
@@ -40,18 +44,32 @@ export class HomeComponent implements OnInit {
           this.itemService.itemsInService.push(element);
       }
 
-      this.itemsShown = this.itemsOriginal.slice();
+      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
       
-      this.itemCategories = this.uniqueCategoryPipe.transform(this.itemsOriginal).map(itemCategory => {
-        return {category: itemCategory, isSelected: true}
-      });
+      if (this.cookieService.get("categories") != "") {
+        let itemCategories = JSON.parse(this.cookieService.get("categories"));
+        this.itemCategories = this.uniqueCategoryPipe.transform(this.itemsOriginal).map((itemCategory,i) => {
+          return {category: itemCategory, isSelected: 
+            (itemCategories[i] && itemCategory==itemCategories[i].category)  ? itemCategories[i].isSelected : true}
+        })
+      } else {
+        this.itemCategories = this.uniqueCategoryPipe.transform(this.itemsOriginal).map(itemCategory => {
+          return {category: itemCategory, isSelected: true}
+        });
+      }
+      
+      
       this.isLoading = false;
+      this.onSelectCategory(-2);
     })
 
   }
   
   onSelectCategory(index: number) {
-    this.itemCategories[index].isSelected = !this.itemCategories[index].isSelected;
+    if (index != -2) {
+      this.itemCategories[index].isSelected = !this.itemCategories[index].isSelected;
+    }
+
     this.itemsShown = this.itemsOriginal.filter(item => {
       let category = this.itemCategories.find(itemCategory => {
         return item.category == itemCategory.category;
@@ -62,11 +80,15 @@ export class HomeComponent implements OnInit {
         return null;
       }
     })
+    this.cookieService.set('categories', JSON.stringify(this.itemCategories));
+    this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
     //this.itemsShown = this.itemsOriginal.filter()
   }
 
+
   onSortTitle() {
     //this.itemService.saveItemsToDatabase(); et andmed saata firebasi
+    
     if (this.titleSortNumber == 0) {
       this.itemsShown.sort((a, b) => {
         return a.title.localeCompare(b.title);
@@ -80,11 +102,14 @@ export class HomeComponent implements OnInit {
       this.titleSortNumber = 2;
     } else {
       this.itemsShown = this.itemService.itemsInService.slice();
+      this.onSelectCategory(-2);
       this.titleSortNumber = 0;
     }
+    this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
   }
 
   onSortPrice() {
+    
     if (this.priceSortNumber == 0) {
       this.itemsShown.sort((a, b) => a.price - b.price);
       this.priceSortNumber = 1;
@@ -93,8 +118,10 @@ export class HomeComponent implements OnInit {
       this.priceSortNumber = 2;
     } else {
       this.itemsShown = this.itemService.itemsInService.slice();
+      this.onSelectCategory(-2);
       this.priceSortNumber = 0;
     }
+    this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
   }
 
   itemActiveChange(item: Item) {
