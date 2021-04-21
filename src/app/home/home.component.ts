@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   itemCategories!: {category: string, isSelected: boolean}[];
   isLoading = false;
   isLoggedIn = false;
+  cartItems!: {cartItem: Item, count: number} [];
   //kuupaev = new Date();
 
   constructor(private itemService: ItemService,
@@ -31,10 +32,12 @@ export class HomeComponent implements OnInit {
     this.checkAuth.autologin();
     this.checkAuth.loggedIn.subscribe(logged => {
       this.isLoggedIn = logged;
+      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsShown, this.isLoggedIn);
     });
     this.isLoggedIn = this.checkAuth.isLoggedIn();
     this.isLoading = true;
-    this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
+    
+    
     this.itemService.getItemsFromDatabase().subscribe(itemsFromDatabase =>{
       this.itemsOriginal = [];
       this.itemService.itemsInService = [];
@@ -57,10 +60,25 @@ export class HomeComponent implements OnInit {
           return {category: itemCategory, isSelected: true}
         });
       }
-      
-      
       this.isLoading = false;
-      this.onSelectCategory(-2);
+      
+
+      let cookieValue = this.cookieService.get('cart');
+      if (cookieValue) {
+        this.cartItems = JSON.parse(cookieValue) ?? [];
+      }
+
+        this.itemsOriginal = this.itemsOriginal.map(obj => {
+          const index = this.cartItems.findIndex(el => el.cartItem.id == obj.id);
+          const { count } = index !== -1 ? this.cartItems[index] : { count: 0 };
+          return {
+            ...obj,
+            count
+          };
+        })
+        console.log(this.itemsOriginal);
+        this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
+        this.onSelectCategory(-2);
     })
 
   }

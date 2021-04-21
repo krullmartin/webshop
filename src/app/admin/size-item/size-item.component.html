@@ -1,11 +1,17 @@
-<label>Lisa uus suurus</label><br>
-<input type="text" [(ngModel)]="size"><br>   <!--two-way binding   {{size}}-->
-<button (click)="onAddSize()">Siesta</button><br>
+<button class="main-button back" routerLink="/admin">{{'Tagasi' | translate}}</button>
 
+<div class="form">
+    <label>Lisa uus suurus</label>
+    <input type="text" [(ngModel)]="size">   <!--two-way binding   {{size}}-->
+    <button class="main-button add" [disabled]="size == '' " (click)="onAddSize()">Sisesta</button><br>
+    
+    <div class="sizes">
+        <span class="size" *ngFor="let size of sizes; let i = index">
+            <div class="added-size">{{size.sizeName}}</div>
+            <button class="main-button delete"  (click)="onDeleteSize(i)">X</button>
+        </span>
+    </div>
+    
 
+</div>
 
-
-<span *ngFor="let size of sizes; let i = index">
-    <div>{{size}}</div>
-    <button (click)="onDeleteSize(i)">X</button>
-</span><br>

@@ -1,18 +1,31 @@
 .active {
     border: 2px solid green;
+    cursor: pointer;
+    padding: 0 10px;
 }
 
 .not-active {
     border: 2px solid red;
+    cursor: pointer;
 }
 
 .item-img {
     width: 100%;
+    height: 130px;  
+}
+
+.item-img-logged {
+    width: 100%;
     height: 130px;
+    margin-top: 10px;
 }
 
 .item-title {
-    height: 100px;
+    height: 80px;
+}
+
+.item-title-logged {
+    height: 70px;
 }
 
 .item-price {
@@ -22,10 +35,12 @@
     padding: 4px 10px 0 10px;
     min-height: 26px;
     width: 80px;
+    margin-left: 10px;
+
 }
 
-.item-title, .item-price {
-    margin: 10px;
+.item-title, .item-title-logged {
+    margin: 10px 10px 0;
 }
 
 .add-to-cart-button-wrapper {

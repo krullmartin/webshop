@@ -20,7 +20,6 @@ export class ViewItemComponent implements OnInit {
     this.checkAuth.autologin();
     //this.items = this.itemService.itemsInService;
     this.itemService.getItemsFromDatabase().subscribe(items => {
-      console.log("olen võtmas uusi esemeid")
       this.items = [];
       this.itemService.itemsInService = [];
       for (const key in items) {

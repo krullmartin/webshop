@@ -1,14 +1,22 @@
 <div class="navbar">
     <img class="logo" routerLink="/" src="assets\WebShop.png">
-    <button *ngIf="isLoggedIn" routerLink="admin">Admini vaade</button>
-    <button *ngIf="isLoggedIn" (click)="onLogout()" >Logi välja</button>
+    <div class="admin-links">
+    <button class="admin-log" *ngIf="isLoggedIn" routerLink="admin">Admini vaade</button>
+    <button class="admin-log" *ngIf="isLoggedIn" (click)="onLogout()" >Logi välja</button>
     <!-- <button *ngIf="!isLoggedIn" routerLink="login">Logi sisse</button>
     <button *ngIf="!isLoggedIn" routerLink="signup">Registreeru</button> -->
+    </div>
     <div>
       <img class="lang-1" (click)="useLanguage('ee')" src="assets/i18n/ee.png">
       <img class="lang-2" (click)="useLanguage('en')" src="assets/i18n/en.png">
     </div>
-    <div routerLink="cart" class="cart-button">
-      <img src="assets\shopping-cart.svg" alt="Cart">
-      <span>€ {{ sumOfCart | thousandSeparator }}</span></div>
-  </div>
+    <div class="dropdown">
+      <div routerLink="cart" class="cart-button">
+        <img src="assets\shopping-cart.svg" alt="Cart">
+        <span>€ {{ sumOfCart | thousandSeparator }}</span>
+      </div>
+      <div class="dropdown-content">
+        <app-cart></app-cart>
+      </div>
+    </div>
+</div>

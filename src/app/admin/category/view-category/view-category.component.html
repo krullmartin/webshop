@@ -1,11 +1,12 @@
-<button class="main-button back" routerLink="/admin">Tagsi</button>
+<button class="main-button back" routerLink="/admin">Tagasi</button>
 
-<button class="main-button" routerLink="/admin/add-category">Halda kategooriaid</button>
 
-<div class="categories-list">
-    <div *ngFor="let category of categories; let i = index">
-        <div>{{ category.categoryName }}</div>
-        <button (click)="onRemoveCategory(i)">Eemalda kategooria</button>
+
+<div class="form sizes">
+    <button class="main-button add" routerLink="/admin/add-category">Halda kategooriaid</button>
+    <div class="size" *ngFor="let category of categories; let i = index">
+        <div class="added-size">{{ category.categoryName }}</div>
+        <button class="main-button delete" (click)="onRemoveCategory(i)">X</button>
         <br><br>
     </div>
 </div>

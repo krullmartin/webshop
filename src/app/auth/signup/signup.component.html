@@ -1,10 +1,9 @@
-{{ error }}
-<br><br>
+<button class="main-button back" routerLink="/admin">{{'Tagasi' | translate}}</button>
 
 <form (ngSubmit)="onSignUp(signupForm)" #signupForm="ngForm">
     <label>Email</label><br>
-    <input type="text" ngModel name="username"><br>
+    <input type="text" ngModel name="username" required><br>
     <label>Parool</label><br>
-    <input type="password" ngModel name="password"><br>
-    <button type="submit">Sisesta</button>
+    <input type="password" ngModel name="password" required><br>
+    <button class="main-button add" [disabled]="signupForm.invalid" type="submit">Sisesta</button>
 </form>

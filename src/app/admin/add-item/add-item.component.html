@@ -26,11 +26,16 @@
     <label>Päritolumaa</label>
     <input type="text" ngModel name="producer" placeholder="Toote päritolumaa"><br>
 
-    <label>Suurus</label><br>
-    <span *ngFor="let size of sizes">
-        <label>{{size}}</label>
+    <label>Suurus</label>
+    <input type="text" placeholder="Vali suurused"><br>
+    
+        <span class="sizes input" *ngFor="let size of sizes">
+        <label class="aadded-size">{{size}}</label>
         <input type="checkbox" (change)="onSizeChanged(size, $event)">
-    </span><br>
+        </span><br>
+
+    
+   
     
 
     <button class="main-button add" [disabled]="addItemForm.invalid" type="submit">Lisa ese</button>

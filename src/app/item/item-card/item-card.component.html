@@ -3,7 +3,8 @@
 <ng-template #notActive>Mitteaktiivseks</ng-template>
 </span>
 
-<img class="item-img" routerLink="view/{{item.id}}" src="{{ item.imgSrc }}">
+<img *ngIf="isLoggedIn" class="item-img-logged" routerLink="view/{{item.id}}" src="{{ item.imgSrc }}">
+<img *ngIf="!isLoggedIn" class="item-img" routerLink="view/{{item.id}}" src="{{ item.imgSrc }}">
 
 <!-- <div class="add-to-cart-button-wrapper">
 
@@ -15,6 +16,6 @@
     
 </div> -->
 
-<div class="item-title" >{{ item.title | translate | shortenTitle }}</div>
+<div *ngIf="isLoggedIn" class="item-title-logged" >{{ item.title | translate | shortenTitle }}</div>
+<div *ngIf="!isLoggedIn" class="item-title" >{{ item.title | translate | shortenTitle }}</div>
 <div class="item-price" >€ {{ item.price | thousandSeparator}}</div>
-    

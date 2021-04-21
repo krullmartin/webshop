@@ -1,0 +1,31 @@
+form {
+    position: relative;
+    top: 60px;
+    text-align: center;
+   
+}
+
+input, select {
+    padding: 12px 20px;
+    margin: 20px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+
+.add {
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    padding: 0 10px;
+}
+
+.add:disabled {
+    background-color: lightgray;
+    cursor: initial;
+}
+
+label {
+    font-size: 16px;
+}

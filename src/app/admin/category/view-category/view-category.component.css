@@ -1,0 +1,57 @@
+.form {
+    display: block;
+    position: relative;
+    top: -100px;
+    margin-left: 100px;
+}
+
+input, select {
+    padding: 12px 20px;
+    margin: 20px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+
+.add, .delete {
+    margin: 10px 0;
+    width: 200px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+.add:disabled {
+    background-color: lightgray;
+    cursor: initial;
+}
+
+label {
+    font-size: 18px;
+}
+
+.sizes {
+    width: 300px;
+    display: block;
+    margin-top: 30px;
+}
+
+.size {
+    display: flex;
+    font-size: 20px;
+}
+
+.added-size {
+    margin: auto;
+}
+
+.delete {
+    width: 25%;
+    margin: 10px;
+}
+
+.delete:hover {
+    background-color: white;
+    color: #007cc3;
+    border: 2px solid #007cc3;
+}

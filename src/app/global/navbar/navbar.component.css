@@ -16,6 +16,27 @@
     cursor: pointer;
 }
 
+.admin-links {
+    display: block;
+    position: absolute;
+    right: 250px;
+}
+
+.admin-log {
+    position: relative;
+    border: 1px solid #007cc3;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: white;
+    color: #007cc3;
+    font-size: 14px;
+    height: 22px;
+    width: 120px;
+    margin: 0 10px;
+    top: 40px;
+    font-weight: 600;
+}
+
 .lang-1, .lang-2 {
     height: 22px;
     top: 40px;
@@ -34,13 +55,18 @@
 .cart-button {
     background-color: rgb(223, 73, 19);
     color: white;
-    padding: 15px;
-    border: 10px solid white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     cursor: pointer;
+    margin: 20px 10px;
+    padding: 10px;
+    border-radius: 10px;
+   
 }
 
 .cart-button img {
-    height: 30px;
+    height: 20px;
     padding-right: 10px;
 
 }
@@ -49,3 +75,22 @@
     background-color: rgb(241, 79, 4);
 }
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 10px;
+    background-color: #f9f9f9;
+    max-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }

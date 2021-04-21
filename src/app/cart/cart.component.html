@@ -1,10 +1,13 @@
 <div class="empty-cart-button" (click)="onEmtyCart ()" 
 *ngIf="cartItems.length > 0">Tühjenda ostukorv</div>  
 
+<div class="your-cart">Sinu ostukorv</div>
+
 <div class="items-wrapper">
     <div class="item" *ngFor="let item of cartItems; let i = index">
-        <img class="item-img" src="{{ item.cartItem.imgSrc }}">
-        <div class="item-title" >{{ item.cartItem.title }} (Suurus: {{ item.cartSize }})</div>
+        <img class="item-img" routerLink="/view/{{ item.cartItem.id}}" src="{{ item.cartItem.imgSrc }}">
+        <div class="item-title" >{{ item.cartItem.title }}<br><br>
+            <div *ngIf="item.cartSize">Suurus: {{ item.cartSize }}</div></div>
         <div class="item-price" >€ {{ item.cartItem.price | thousandSeparator}}</div>
         <span class="add-to-cart-button">
             <span (click)="onRemoveFromCart(item)"><img src="assets/minus.svg"></span>
@@ -20,6 +23,7 @@
 *ngIf="cartItems.length > 0">KOKKU: € {{ sumOfCart | thousandSeparator }}</div>
 
 <div class="empty-cart" *ngIf="cartItems.length == 0">
-    <img src="assets\emty-cart.png" alt="Cart">
+    <img src="assets\shopping-cart-empty.svg" alt="Cart">
     <div>Teie ostukorv on tühi</div>
+    <button class="cont-btn" routerLink="">Jätka shoppamist</button>
 </div>

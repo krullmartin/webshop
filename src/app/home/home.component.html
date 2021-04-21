@@ -9,11 +9,33 @@
 </div>
 
 <div class="main">
-    <div class="filter-bar">
+    <div class="filter">
+        <div class="filter-bar">
         <div class="filter-name">{{ 'Järjesta:' | translate | uppercase }}</div>
         <div class="filter-value title" (click)="onSortTitle()">{{ 'Tähestiku järgi' | translate }}</div>
+        <span>|</span>
         <div class="filter-value price" (click)="onSortPrice()">{{ 'Hinna järgi' | translate }}</div>
+        </div>
+
+        <div class="shown-active-items-count" *ngIf="itemsShown.length > 0">{{itemsShown.length}} 
+            <span *ngIf="itemsShown.length > 1">toodet</span>
+            <span *ngIf="itemsShown.length == 1">toode</span>
+        </div>
     </div>
+
+    <div class="shown-active-items">
+
+        <div class="shown-active-items-cat">
+            <div *ngFor="let category of itemsOriginal | showActiveItems:isLoggedIn | uniqueCategory; let i = index">
+                <label class="shown-cat" for="{{category}}" *ngIf="itemCategories[i].isSelected">{{category}}
+                    <span class="shown-cat-x">x</span>
+                </label>
+            </div>
+        </div>
+        
+       
+    </div>
+    
 
     <div class="items-wrapper">    
         <app-item-card 

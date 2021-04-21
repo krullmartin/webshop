@@ -1,5 +1,7 @@
-<button class="main-button back" routerLink="/admin">Tagsi</button>
+<button class="main-button back" routerLink="/admin/categories">Tagasi</button>
 
-<label>Kategooria nimetus</label>
-<input type="text" [(ngModel)]="newCategory" placeholder="Toote kategooria">
-<button (click)="onSubmit()">Sisesta uus kategooria</button>
+<div class="form">
+    <label>Kategooria nimetus</label>
+    <input type="text" [(ngModel)]="newCategory" placeholder="Toote kategooria">
+    <button class="main-button add" (click)="onSubmit()">Sisesta</button>
+</div>

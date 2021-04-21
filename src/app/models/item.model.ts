@@ -10,5 +10,6 @@ export class Item {
         public description: string,
         public isActive: boolean,
         public size: string[],
+        public count: number
     ) {}
 }

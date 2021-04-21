@@ -1,21 +1,21 @@
 <div *ngIf="item" class="panel">
     <img class="item-img" src="{{ item.imgSrc }}">
-    <div>
+    <div class="panel-right">
         <h1 class="item-title">{{ item.title | translate | shortenTitle }}</h1>
-        <div class="item-price">{{ item.price | thousandSeparator }} €</div>
-
-        <select [(ngModel)]="cartSize" *ngIf="item.size">
-            <option value="" disabled selected>Vali suurus</option>
-            <option [value]="size" *ngFor="let size of item.size">{{ size }}</option>
-        </select><br>
-
-        <div class="add-to-cart-button-wrapper">
-            <div class="add-to-cart-button">
-                <span (click)="onRemoveFromCart(item)"><img src="assets/minus.svg"></span>
-                <span>____tk____</span>
-                <span [ngClass]="{'size-not-selected': cartSize == '' && item.size}" (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
-            </div>
+        <div class="item-price">€ {{ item.price | thousandSeparator }}</div>
+        <div>
+            <select class="item-size" [(ngModel)]="cartSize" *ngIf="item.size">
+                <option value="" disabled selected>Vali suurus</option>
+                <option [value]="size" *ngFor="let size of item.size">{{ size }}</option>
+            </select>
         </div>
+
+        <div class="add-to-cart-button">
+            <span [ngClass]="{'size-not-selected': cartSize == '' && item.size}" (click)="onRemoveFromCart(item)"><img src="assets/minus.svg"></span>
+            <div>_tk_</div>
+            <span [ngClass]="{'size-not-selected': cartSize == '' && item.size}" (click)="onAddToCart(item)"><img src="assets/plus.svg"></span>
+        </div>
+      
     </div>
 </div>
 

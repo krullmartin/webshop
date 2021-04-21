@@ -1,3 +1,13 @@
+@media only screen and (max-width: 550px) {
+    .item {
+        background-color: yellow;
+    }
+    .filter-bar {
+        display: block;
+    }
+}
+
+
 .sidenav {
     height: 100%;
     width: 160px;
@@ -8,13 +18,13 @@
 
 .sidenav label {
     padding: 6px 8px 6px 16px;
-    font-size: 25px;
+    font-size: 20px;
     display: block;
 }
 
 .sidenav label:hover {
     cursor: pointer;
-    color: black;
+    color: rgb(165, 30, 30);
     font-weight: 600;
 }
 
@@ -24,19 +34,58 @@
     padding: 0 10px;
 }
 
-.filter-bar {
+.filter {
     display: flex;
-    align-items: center;
-    background-color: #f2f2f2;
+    justify-content: space-between;
     height: 40px;
     margin: 10px;
     padding-left: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid;
+}
+
+.filter-bar, .shown-active-items-cat {
+    display: flex;
 }
 
 .filter-value {
-    margin-left: 10px;
+    margin: 0 15px;
     cursor: pointer;
 }
+
+
+.shown-active-items {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 10px 15px;
+}
+
+
+.shown-cat {
+    border: 1px solid #007cc3;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: white;
+    color: #007cc3;
+    font-size: 18px;
+    padding: 5px 15px;
+    margin: 0 5px;
+}
+
+.shown-cat-x {
+    margin-left: 8px;
+}
+
+.shown-cat:hover, .filter-value:hover {
+    /* border: 2px solid #007cc3; */
+    font-weight: 600;
+}
+
+.shown-active-items-count {
+    font-size: 16px;
+}
+
+
 
 .items-wrapper {
     padding: 10px;

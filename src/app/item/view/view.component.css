@@ -1,15 +1,20 @@
 .panel {
+    width: 800px;
     display: flex;
+    justify-content: space-evenly;
     margin: 0 auto;
-    margin-right: 240px;
     padding: 30px 50px 40px;
     position: relative;
+}
+
+.panel-right {
+    width: 375px;
+    display: block;
 }
 
 .item-img {
     width: 375px;
     height: 375px;
-    margin: 0 auto;
     margin-right: 50px;
     display: block;
 }
@@ -24,14 +29,53 @@ h1::after {
 }
 
 .item-price {
-    margin-right: 8px;
-    margin-top: 8px;
+    text-align: center;
     background-color: #f2f2f2;
-    padding: 5px 26px;
     border-radius: 10px 0 10px 10px;
-    width: 70px;
+    padding: 4px 10px 0 10px;
+    min-height: 26px;
+    width: 80px;
 }
 
-.size-not-selected {
-    opacity: 0.5;
+
+.item-size {
+    height: 30px;
+    width: 100%;
+    margin-right: 8px;
+    margin-top: 20px;
+    background-color: #eee8e8;
+    border: hidden;
+    padding: 5px 26px;
+    border-radius: 10px;
+    cursor: pointer;
 }
+
+.item-size option {
+   
+    background-color: white;
+    border-radius: 30px;
+}
+
+.item-size option:hover {
+    background-color: #eee8e8;
+}
+
+.add-to-cart-button {
+    margin-top: 30px;
+    display: flex;
+    width: 40%;
+    justify-content: space-evenly;
+    margin-left: 30%;
+}
+
+.add-to-cart-button div {
+    margin-top: 15px;
+}
+
+
+
+.size-not-selected img{
+    opacity: 0.5;
+    cursor:auto;
+}
+
