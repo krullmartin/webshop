@@ -2,10 +2,15 @@
 <!--{{ 1500000 | currency:'EUR' }}-->
 
 <div class="sidenav">
-    <div *ngFor="let category of itemsOriginal | showActiveItems:isLoggedIn | uniqueCategory; let i = index">
+
+    
+    <div [ngClass]="{'category-active': categoryShown=='all'}" (click)="onCategorySelect('all')">Kõik kategooriad</div>
+    <div  *ngFor="let category of itemsOriginal | showActiveItems:isLoggedIn | uniqueCategory; let i = index">
+        
         <input (click)="onSelectCategory(i)" hidden type="checkbox" id="{{category}}">
         <label for="{{category}}" [ngClass]="{'category-active': itemCategories[i].isSelected}">{{category}}</label>
     </div>
+
 </div>
 
 <div class="main">

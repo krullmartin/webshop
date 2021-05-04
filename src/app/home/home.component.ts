@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   isLoading = false;
   isLoggedIn = false;
   cartItems!: {cartItem: Item, count: number} [];
+  categoryShown = "";
   //kuupaev = new Date();
 
   constructor(private itemService: ItemService,
@@ -76,12 +77,26 @@ export class HomeComponent implements OnInit {
             count
           };
         })
-        console.log(this.itemsOriginal);
+       
         this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
+        this.onCategorySelect('all');
         this.onSelectCategory(-2);
+        
+        
     })
 
   }
+
+  onCategorySelect(category: string) {
+    if (category == 'all') {
+      this.itemsShown = this.showActiveItemsPipe.transform(this.itemsOriginal.slice(), this.isLoggedIn);
+      this.categoryShown = 'all';
+    } else {
+      this.categoryShown = category;
+      this.itemsShown = this.itemsOriginal.filter((item)=>item.category==category)
+    }
+  }
+
   
   onSelectCategory(index: number) {
     if (index != -2) {

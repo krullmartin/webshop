@@ -11,6 +11,7 @@ import { ItemModule } from '../item/item.module';
 import { SizeItemComponent } from './size-item/size-item.component';
 import { AddCategoryComponent } from './category/add-category/add-category.component';
 import { ViewCategoryComponent } from './category/view-category/view-category.component';
+import { AutosizeDirective } from './autosize.directive';
 
 
 
@@ -23,6 +24,7 @@ import { ViewCategoryComponent } from './category/view-category/view-category.co
     SizeItemComponent,
     AddCategoryComponent,
     ViewCategoryComponent,
+    AutosizeDirective,
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,7 @@ import { ViewItemComponent } from './admin/view-item/view-item.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { CartNavbarComponent } from './cart/cart-navbar/cart-navbar.component';
 import { CartComponent } from './cart/cart.component';
 import { HomeComponent } from './home/home.component';
 import { ViewComponent } from './item/view/view.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path:"login", component: LoginComponent},
   {path:"view/:itemId", component: ViewComponent},
   {path:"cart", component: CartComponent},
+  {path:"cart-nav", component: CartNavbarComponent},
 
   {path:"admin", canActivate: [AuthGuard], children: [
     {path:"", component: AdminHomeComponent},

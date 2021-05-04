@@ -1,5 +1,12 @@
 <button class="main-button back" routerLink="/admin">{{'Tagasi' | translate}}</button>
 
+<input 
+    type="text"
+    class="search-bar"
+    [(ngModel)]="searchedItem"
+    (keyup)= "onSearch()"
+    placeholder="Otsi ID või nime alusel">
+
 <div class="item-wrapper">    
     <div class="item" *ngFor="let item of items">
         <!--<img src="{{ item.imgSrc }}">-->

@@ -13,7 +13,7 @@ import { SizeService } from '../size-item/size.service';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
-  sizes: string [] = [];
+  sizes: {id: string, sizeName: string} [] = [];
   itemSizes: string [] = [];
   categories: {categoryName: string} [] = [];
 
@@ -24,6 +24,14 @@ export class AddItemComponent implements OnInit {
     private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+
+    this.sizeService.getSizesFromDatabase().subscribe(sizesFromFb => {
+      for (const key in sizesFromFb) {
+        const element = sizesFromFb[key];
+        this.sizes.push({id: key, sizeName: element.sizeName});
+      }
+    });
+    
     this.categoryService.getCategoriesFromDatabase().subscribe(categoriesFromFb => {
       for (const key in categoriesFromFb) {
         const element = categoriesFromFb[key];
@@ -32,7 +40,7 @@ export class AddItemComponent implements OnInit {
     });
     this.itemSizes = [];
     this.checkAuth.autologin();
-    this.sizes = this.sizeService.sizes;
+  
   }
 
   onSizeChanged(size: string, event: Event) {

@@ -20,6 +20,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { ShowActiveItemsPipe } from './home/show-active-items.pipe';
 import { AdminModule } from './admin/admin.module';
 import { ItemModule } from './item/item.module';
+import { CartNavbarComponent } from './cart/cart-navbar/cart-navbar.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -37,7 +38,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SpinnerComponent,
     LoginComponent,
     SignupComponent,
-    ShowActiveItemsPipe
+    ShowActiveItemsPipe,
+    CartNavbarComponent
   ],
   imports: [
     BrowserModule,

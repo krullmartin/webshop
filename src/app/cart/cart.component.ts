@@ -12,6 +12,7 @@ import { CartService } from './cart.service';
 export class CartComponent implements OnInit {
   cartItems: {cartItem: Item, cartSize: string, count: number}[] = []; 
   sumOfCart: number = 0;
+  countOfCart: number = 0;
 
   constructor(private cartService: CartService,
     private checkAuth: CheckAuthService,
@@ -22,16 +23,19 @@ export class CartComponent implements OnInit {
     this.checkAuth.autologin();
     this.cartItems = this.cartService.cartItems;
     this.calculateSumOfCart();
+    this.calculateCountOfCart();
   }
 
   onDeleteFromCart(index: number){
     this.cartService.cartItems.splice(index,1);
     this.calculateSumOfCart();
+    this.calculateCountOfCart();
   }
 
   onEmtyCart () {
     this.cartService.cartItems.splice(0);
     this.calculateSumOfCart();
+    this.calculateCountOfCart();
   }
 
   onRemoveFromCart(item: any) {
@@ -44,6 +48,7 @@ export class CartComponent implements OnInit {
         this.cartService.cartItems[i].count -= 1;
       }
       this.calculateSumOfCart();
+      this.calculateCountOfCart();
     }
   }
 
@@ -54,6 +59,7 @@ export class CartComponent implements OnInit {
       this.cartService.cartItems[i].count += 1;
     } 
       this.calculateSumOfCart();
+      this.calculateCountOfCart();
   }
 
   // koodi korduv osa lihtsamal kujul
@@ -67,5 +73,15 @@ export class CartComponent implements OnInit {
     this.cookieService.set( 'cart', JSON.stringify(this.cartService.cartItems) );
   }
 
+  calculateCountOfCart() {
+    this.countOfCart = 0;
+    this.cartItems.forEach(item => {
+      //this.sumOfCart = this.sumOfCart + item.price;
+      this.countOfCart += item.count;
+    });
+    this.cartService.cartChanged.next(this.cartService.cartItems);
+    this.cookieService.set( 'cart', JSON.stringify(this.cartService.cartItems) );
+
+  }
   
 }

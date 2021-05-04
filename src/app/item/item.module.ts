@@ -25,7 +25,8 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     ItemCardComponent,
-    ThousandSeparatorPipe
+    ThousandSeparatorPipe,
+    ShortenTitlePipe
   ],
 })
 export class ItemModule { }

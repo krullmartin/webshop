@@ -6,7 +6,7 @@
 <div class="items-wrapper">
     <div class="item" *ngFor="let item of cartItems; let i = index">
         <img class="item-img" routerLink="/view/{{ item.cartItem.id}}" src="{{ item.cartItem.imgSrc }}">
-        <div class="item-title" >{{ item.cartItem.title }}<br><br>
+        <div class="item-title" >{{ item.cartItem.title | shortenTitle}}<br><br>
             <div *ngIf="item.cartSize">Suurus: {{ item.cartSize }}</div></div>
         <div class="item-price" >€ {{ item.cartItem.price | thousandSeparator}}</div>
         <span class="add-to-cart-button">
@@ -19,8 +19,19 @@
     </div>
 </div>
 
+<div class="sum-of-cart" *ngIf="cartItems.length > 0">
+    <div>
+        <span class="count-of-cart">{{ countOfCart }} 
+            <span *ngIf="countOfCart > 1">toodet</span>
+            <span *ngIf="countOfCart == 1">toode</span> 
+        </span>
+    </div>
+</div><br><br>
+
 <div class="sum-of-cart"
 *ngIf="cartItems.length > 0">KOKKU: € {{ sumOfCart | thousandSeparator }}</div>
+
+
 
 <div class="empty-cart" *ngIf="cartItems.length == 0">
     <img src="assets\shopping-cart-empty.svg" alt="Cart">

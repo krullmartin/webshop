@@ -11,6 +11,7 @@ import { ItemService } from 'src/app/services/item.service';
 })
 export class ViewItemComponent implements OnInit {
   items: Item [] = [];
+  searchedItem = "";
 
   constructor(private itemService: ItemService,
     private translate: TranslateService,
@@ -40,9 +41,20 @@ export class ViewItemComponent implements OnInit {
       this.items.splice(i, 1);
       this.itemService.saveItemsToDatabase().subscribe();
       }
-      
     }
-    
+  }
+
+  onSearch() {
+    this.items.forEach((item,i) => {
+      let itemDiv = document.getElementsByClassName("item")[i] as HTMLElement
+      if (item.id.toString().indexOf(this.searchedItem) > -1 ||
+      // (item.id.toLocaleString(this.searchedItem).length > -1 ||
+            item.title.toUpperCase().indexOf(this.searchedItem.toUpperCase()) > -1) {
+          itemDiv.style.display = "";
+        } else {
+          itemDiv.style.display = "none";
+        }
+    });
   }
 
 }
